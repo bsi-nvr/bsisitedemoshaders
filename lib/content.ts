@@ -160,6 +160,7 @@ export const siteContent = {
                     direction: "left",
                     email: "mark@brainsoftict.nl",
                     phone: "+31857010329",
+                    bio: "Mark is a visionary leader with over 15 years of experience in IT management. He specializes in strategic planning and fostering a culture of innovation.",
                 },
                 {
                     name: "Niek van Rijswijk",
@@ -167,6 +168,7 @@ export const siteContent = {
                     direction: "right",
                     email: "niek@brainsoftict.nl",
                     phone: "+31857010329",
+                    bio: "Niek is our infrastructure expert, ensuring 99.99% uptime and robust security. He loves automating complex workflows and optimizing cloud environments.",
                 },
                 {
                     name: "Mike Jansen",
@@ -174,6 +176,7 @@ export const siteContent = {
                     direction: "left",
                     email: "mike@brainsoftict.nl",
                     phone: "+31857010329",
+                    bio: "Mike is an enthusiastic developer with a knack for frontend technologies. He's currently mastering React and Next.js to build stunning user interfaces.",
                 },
                 {
                     name: "Sander Tensen",
@@ -181,6 +184,7 @@ export const siteContent = {
                     direction: "right",
                     email: "sander@brainsoftict.nl",
                     phone: "+31857010329",
+                    bio: "Sander brings a wealth of financial and operational expertise to the board. He ensures that Brainsoft remains fiscally responsible while pursuing aggressive growth.",
                 },
                 {
                     name: "Sabine Tensen",
@@ -188,6 +192,7 @@ export const siteContent = {
                     direction: "left",
                     email: "sabine@brainsoftict.nl",
                     phone: "+31857010329",
+                    bio: "Sabine oversees our talent acquisition and HR strategies. She is passionate about building diverse teams and ensuring a positive work environment.",
                 },
             ],
         },

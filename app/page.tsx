@@ -8,15 +8,41 @@ import { ServicesSection } from "@/components/sections/services-section"
 import { AboutSection } from "@/components/sections/about-section"
 import { ContactSection } from "@/components/sections/contact-section"
 import { MagneticButton } from "@/components/magnetic-button"
-import { useRef, useEffect, useState } from "react"
+import { useRef, useEffect, useState, useMemo } from "react"
 import { siteContent, type Language } from "@/lib/content"
+import { shaderThemes, type ThemeKey, type ShaderTheme } from "@/lib/shader-themes"
 
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [currentSection, setCurrentSection] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
   const [language, setLanguage] = useState<"en" | "nl">("en")
-  const [buttonText, setButtonText] = useState("Helpdesk")
+  const buttonText = "Helpdesk"
+  const [currentThemeKey, setCurrentThemeKey] = useState<ThemeKey | "custom">("modern")
+  const [customPrimary, setCustomPrimary] = useState("#3b82f6")
+  const [customSecondary, setCustomSecondary] = useState("#10b981")
+
+  const currentTheme: ShaderTheme = useMemo(() => {
+    if (currentThemeKey !== "custom") {
+      return shaderThemes[currentThemeKey]
+    }
+
+    // Dynamic generation for custom theme
+    return {
+      name: "Custom",
+      swirl: {
+        colorA: customPrimary,
+        colorB: customSecondary,
+      },
+      chromaFlow: {
+        baseColor: customPrimary, // Simplified mapping
+        upColor: customPrimary,
+        downColor: customSecondary,
+        leftColor: customSecondary,
+        rightColor: customPrimary,
+      },
+    }
+  }, [currentThemeKey, customPrimary, customSecondary])
   const touchStartY = useRef(0)
   const touchStartX = useRef(0)
   const shaderContainerRef = useRef<HTMLDivElement>(null)
@@ -62,12 +88,13 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    if (language === "nl") {
-      setButtonText("Klantenservice")
-    } else {
-      setButtonText("Helpdesk")
+    if (typeof navigator !== "undefined") {
+      const lang = navigator.language
+      if (lang.startsWith("nl")) {
+        setLanguage("nl")
+      }
     }
-  }, [language])
+  }, [])
 
   const scrollToSection = (index: number) => {
     if (scrollContainerRef.current) {
@@ -204,8 +231,8 @@ export default function Home() {
       >
         <Shader className="h-full w-full">
           <Swirl
-            colorA="#1275d8"
-            colorB="#e19136"
+            colorA={currentTheme.swirl.colorA}
+            colorB={currentTheme.swirl.colorB}
             speed={0.8}
             detail={0.8}
             blend={50}
@@ -217,11 +244,11 @@ export default function Home() {
             fineY={40}
           />
           <ChromaFlow
-            baseColor="#0066ff"
-            upColor="#0066ff"
-            downColor="#d1d1d1"
-            leftColor="#e19136"
-            rightColor="#e19136"
+            baseColor={currentTheme.chromaFlow.baseColor}
+            upColor={currentTheme.chromaFlow.upColor}
+            downColor={currentTheme.chromaFlow.downColor}
+            leftColor={currentTheme.chromaFlow.leftColor}
+            rightColor={currentTheme.chromaFlow.rightColor}
             intensity={0.9}
             radius={1.8}
             momentum={25}
@@ -292,14 +319,14 @@ export default function Home() {
         <section className="flex min-h-screen w-screen shrink-0 flex-col justify-end px-6 pb-16 pt-24 md:px-12 md:pb-24">
           <div className="max-w-3xl">
 
-            <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-sans text-6xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 md:text-7xl lg:text-8xl">
+            <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-sans text-6xl font-light leading-[1.1] tracking-tight text-white duration-1000 md:text-7xl lg:text-8xl">
               <span className="text-balance">
                 {siteContent[language].hero.title}
                 <br />
                 {siteContent[language].hero.subtitle}
               </span>
             </h1>
-            <p className="mb-8 max-w-xl animate-in fade-in slide-in-from-bottom-4 text-lg leading-relaxed text-foreground/90 duration-1000 delay-200 md:text-xl">
+            <p className="mb-8 max-w-xl animate-in fade-in slide-in-from-bottom-4 text-lg leading-relaxed text-white/90 duration-1000 delay-200 md:text-xl">
               <span className="text-pretty">
                 {siteContent[language].hero.description}
               </span>
@@ -321,6 +348,61 @@ export default function Home() {
         <ServicesSection language={language} />
         <AboutSection scrollToSection={scrollToSection} language={language} />
         <ContactSection language={language} />
+
+        {/* Theme Switcher */}
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2 rounded-xl border border-foreground/10 bg-background/50 p-3 backdrop-blur-md transition-opacity duration-700 md:bottom-12 md:right-12">
+          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-foreground/60">Theme</p>
+          <div className="grid grid-cols-2 gap-2">
+            {Object.entries(shaderThemes).map(([key, theme]) => (
+              <button
+                key={key}
+                onClick={() => setCurrentThemeKey(key as ThemeKey)}
+                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${currentThemeKey === key
+                  ? "bg-foreground text-background"
+                  : "bg-foreground/5 text-foreground hover:bg-foreground/10"
+                  }`}
+              >
+                {theme.name.split(" ")[0]}
+              </button>
+            ))}
+            {/* Custom Theme Button */}
+            <button
+              onClick={() => setCurrentThemeKey("custom")}
+              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${currentThemeKey === "custom"
+                ? "bg-foreground text-background"
+                : "bg-foreground/5 text-foreground hover:bg-foreground/10"
+                }`}
+            >
+              Custom
+            </button>
+          </div>
+
+          {/* Custom Color Pickers */}
+          {currentThemeKey === "custom" && (
+            <div className="mt-2 grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-bottom-2">
+              <div className="flex flex-col gap-1">
+                <label htmlFor="primary-color" className="text-[10px] font-medium uppercase tracking-wider text-foreground/60">Primary</label>
+                <input
+                  id="primary-color"
+                  type="color"
+                  value={customPrimary}
+                  onChange={(e) => setCustomPrimary(e.target.value)}
+                  className="h-8 w-full cursor-pointer rounded border border-foreground/10 bg-transparent p-0"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="secondary-color" className="text-[10px] font-medium uppercase tracking-wider text-foreground/60">Secondary</label>
+                <input
+                  id="secondary-color"
+                  type="color"
+                  value={customSecondary}
+                  onChange={(e) => setCustomSecondary(e.target.value)}
+                  className="h-8 w-full cursor-pointer rounded border border-foreground/10 bg-transparent p-0"
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <style jsx global>{`

@@ -93,7 +93,7 @@ function PeopleCard({
   index,
   isVisible,
 }: {
-  person: { name: string; role: string; direction: string; email?: string; phone?: string }
+  person: { name: string; role: string; direction: string; email?: string; phone?: string; bio?: string }
   index: number
   isVisible: boolean
 }) {
@@ -117,7 +117,7 @@ function PeopleCard({
 
   return (
     <div
-      className={`group transition-all duration-700 ${getRevealClass()}`}
+      className={`group relative transition-all duration-700 ${getRevealClass()}`} // Added relative
       style={{
         transitionDelay: `${index * 150}ms`,
       }}
@@ -149,6 +149,38 @@ function PeopleCard({
           </a>
         )}
       </div>
+
+      {/* Learn More Arrow */}
+      <Dialog>
+        <DialogTrigger asChild>
+          <button className="absolute top-0 right-0 p-3 outline-none" aria-label={`Read more about ${person.name}`}>
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground/10 text-foreground transition-all duration-300 group-hover:bg-foreground group-hover:text-background group-hover:scale-110">
+              <ArrowUpRight className="h-4 w-4" />
+            </div>
+          </button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-md bg-black/80 backdrop-blur-xl border-white/10 text-foreground">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-light mb-2">{person.name}</DialogTitle>
+            <DialogDescription className="text-base text-foreground/80 leading-relaxed">
+              <span className="block mb-4 font-mono text-xs uppercase tracking-wider text-foreground/60">{person.role}</span>
+              {person.bio || "Bio content coming soon..."}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex gap-4 mt-4">
+            {person.phone && (
+              <a href={`tel:${person.phone}`} className="flex items-center gap-2 text-sm text-foreground/60 hover:text-foreground transition-colors">
+                <Phone className="h-4 w-4" /> <span>Call</span>
+              </a>
+            )}
+            {person.email && (
+              <a href={`mailto:${person.email}`} className="flex items-center gap-2 text-sm text-foreground/60 hover:text-foreground transition-colors">
+                <Mail className="h-4 w-4" /> <span>Email</span>
+              </a>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
