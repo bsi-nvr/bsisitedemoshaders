@@ -154,6 +154,48 @@ export const shaderThemes: Record<string, ShaderTheme> = {
             rightColor: "#bae6fd", // Sky 200
         },
     },
+    goldenHour: {
+        name: "Golden Hour",
+        swirl: {
+            colorA: "#d97706", // Amber 600
+            colorB: "#b45309", // Amber 700
+        },
+        chromaFlow: {
+            baseColor: "#451a03", // Amber 950
+            upColor: "#d97706", // Amber 600
+            downColor: "#f59e0b", // Amber 500
+            leftColor: "#b45309", // Amber 700
+            rightColor: "#fbbf24", // Amber 400
+        },
+    },
+    aurora: {
+        name: "Aurora",
+        swirl: {
+            colorA: "#2dd4bf", // Teal 400
+            colorB: "#a855f7", // Purple 500
+        },
+        chromaFlow: {
+            baseColor: "#020617", // Slate 950
+            upColor: "#2dd4bf", // Teal 400
+            downColor: "#a855f7", // Purple 500
+            leftColor: "#0d9488", // Teal 600
+            rightColor: "#c084fc", // Purple 400
+        },
+    },
+    royal: {
+        name: "Royal",
+        swirl: {
+            colorA: "#581c87", // Purple 900
+            colorB: "#fbbf24", // Amber 400
+        },
+        chromaFlow: {
+            baseColor: "#2e1065", // Violet 950
+            upColor: "#581c87", // Purple 900
+            downColor: "#fbbf24", // Amber 400
+            leftColor: "#7e22ce", // Purple 700
+            rightColor: "#fcd34d", // Amber 300
+        },
+    },
 }
 
 export type ThemeKey = keyof typeof shaderThemes
