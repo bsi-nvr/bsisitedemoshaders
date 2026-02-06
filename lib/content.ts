@@ -1,0 +1,218 @@
+export const siteContent = {
+    en: {
+        hero: {
+            title: "Brainsoft ICT",
+            subtitle: "Talent that works",
+            description: "Transforming digital spaces with dynamic shader effects and real-time visual experiences that captivate and inspire.",
+            scroll: "Scroll to explore",
+        },
+        nav: {
+            home: "Home",
+            services: "Services",
+            about: "About",
+            contact: "Contact",
+        },
+        services: {
+            title: "Services",
+            subtitle: "/ What we bring to the table",
+            cards: [
+                {
+                    title: "Cloud based management",
+                    description: "Complete management and optimization of your cloud infrastructure",
+                    detailedDescription: "We provide comprehensive cloud management services ensuring high availability, security, and scalability. Our team optimizes your infrastructure to reduce costs while maximizing performance.",
+                },
+                {
+                    title: "Development",
+                    description: "Custom software solutions tailored to your specific business needs",
+                    detailedDescription: "From web applications to complex enterprise systems, we build software that drives your business forward. We use modern technologies to ensure reliability and maintainability.",
+                },
+                {
+                    title: "Databases",
+                    description: "Secure, scalable, and efficient data storage architectures",
+                    detailedDescription: "We design and manage robust database solutions. Whether it's SQL or NoSQL, we ensure your data is secure, accessible, and optimized for high-performance queries.",
+                },
+            ],
+        },
+        about: {
+            title: "About Brainsoft",
+            subtitle: "/ Who we are",
+            description: "Brainsoft ICT connects top-tier talent with innovative companies. We specialize in finding the perfect match for your IT needs, ensuring sustainable growth and technical excellence.",
+            readMore: "Read More",
+            meetTeam: "Meet the Team",
+            startProject: "Start a Project",
+            modal: {
+                title: "About Brainsoft",
+                p1: "At Brainsoft ICT, we believe that talent is the driving force behind every successful digital transformation. Our mission is to bridge the gap between skilled professionals and forward-thinking organizations.",
+                p2: "With years of experience in the IT sector, we understand the nuances of both technical requirements and cultural fit. We don't just fill vacancies; we build teams that innovate and deliver.",
+                p3: "Whether you are looking for cloud specialists, developers, or strategic consultants, Brainsoft ICT provides the expertise you need to stay ahead in a rapidly evolving digital landscape.",
+            },
+            cards: [
+                {
+                    name: "Mark van Staden",
+                    role: "Director & Manager",
+                    direction: "left",
+                    email: "mark@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+                {
+                    name: "Niek van Rijswijk",
+                    role: "System Administrator",
+                    direction: "right",
+                    email: "niek@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+                {
+                    name: "Mike Jansen",
+                    role: "Trainee",
+                    direction: "left",
+                    email: "mike@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+                {
+                    name: "Sander Tensen",
+                    role: "Board Member",
+                    direction: "right",
+                    email: "sander@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+                {
+                    name: "Sabine Tensen",
+                    role: "Board Member",
+                    direction: "left",
+                    email: "sabine@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+            ],
+        },
+        contact: {
+            title: "Get in Touch",
+            subtitle: "Ready to start your next project?",
+            form: {
+                firstName: "First Name",
+                lastName: "Last Name",
+                email: "Email",
+                company: "Company",
+                role: "Role",
+                message: "Message",
+                submit: "Send Message",
+                sending: "Sending...",
+            },
+            info: {
+                email: "Email",
+                phone: "Phone",
+                address: "Office",
+                postalAddress: "Postal Address",
+                kvk: "KVK Number",
+            },
+        },
+    },
+    nl: {
+        hero: {
+            title: "Brainsoft ICT",
+            subtitle: "Talent dat werkt",
+            description: "Transformeer digitale ruimtes met dynamische shader-effecten en real-time visuele ervaringen die boeien en inspireren.",
+            scroll: "Scroll om te ontdekken",
+        },
+        nav: {
+            home: "Home",
+            services: "Diensten",
+            about: "Over ons",
+            contact: "Contact",
+        },
+        services: {
+            title: "Diensten",
+            subtitle: "/ Wat wij bieden",
+            cards: [
+                {
+                    title: "Cloud based beheer",
+                    description: "Volledig beheer en optimalisatie van uw cloudinfrastructuur",
+                    detailedDescription: "Wij bieden uitgebreide cloudbeheerdiensten die zorgen voor hoge beschikbaarheid, beveiliging en schaalbaarheid. Ons team optimaliseert uw infrastructuur om kosten te verlagen en prestaties te maximaliseren.",
+                },
+                {
+                    title: "Development",
+                    description: "Maatwerk software-oplossingen afgestemd op uw specifieke bedrijfsbehoeften",
+                    detailedDescription: "Van webapplicaties tot complexe bedrijfssystemen, wij bouwen software die uw bedrijf vooruit helpt. We gebruiken moderne technologieën om betrouwbaarheid en onderhoudbaarheid te garanderen.",
+                },
+                {
+                    title: "Databases",
+                    description: "Veilige, schaalbare en efficiënte data-opslagarchitecturen",
+                    detailedDescription: "Wij ontwerpen en beheren robuuste database-oplossingen. Of het nu gaat om SQL of NoSQL, wij zorgen ervoor dat uw gegevens veilig, toegankelijk en geoptimaliseerd zijn voor snelle query's.",
+                },
+            ],
+        },
+        about: {
+            title: "Over Brainsoft",
+            subtitle: "/ Wie wij zijn",
+            description: "Brainsoft ICT verbindt toptalent met innovatieve bedrijven. Wij zijn gespecialiseerd in het vinden van de perfecte match voor uw IT-behoeften, wat zorgt voor duurzame groei en technische excellentie.",
+            readMore: "Lees Meer",
+            meetTeam: "Ontmoet het Team",
+            startProject: "Start een Project",
+            modal: {
+                title: "Over Brainsoft",
+                p1: "Bij Brainsoft ICT geloven we dat talent de drijvende kracht is achter elke succesvolle digitale transformatie. Onze missie is om de kloof te overbruggen tussen bekwame professionals en vooruitstrevende organisaties.",
+                p2: "Met jarenlange ervaring in de IT-sector begrijpen we de nuances van zowel technische vereisten als culturele fit. We vullen niet alleen vacatures in; we bouwen teams die innoveren en leveren.",
+                p3: "Of u nu op zoek bent naar cloudspecialisten, ontwikkelaars of strategische consultants, Brainsoft ICT biedt de expertise die u nodig hebt om voorop te blijven in een snel veranderend digitaal landschap.",
+            },
+            cards: [
+                {
+                    name: "Mark van Staden",
+                    role: "Directeur & Manager",
+                    direction: "left",
+                    email: "mark@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+                {
+                    name: "Niek van Rijswijk",
+                    role: "System Administrator",
+                    direction: "right",
+                    email: "niek@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+                {
+                    name: "Mike Jansen",
+                    role: "Trainee",
+                    direction: "left",
+                    email: "mike@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+                {
+                    name: "Sander Tensen",
+                    role: "Bestuurslid",
+                    direction: "right",
+                    email: "sander@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+                {
+                    name: "Sabine Tensen",
+                    role: "Bestuurslid",
+                    direction: "left",
+                    email: "sabine@brainsoftict.nl",
+                    phone: "+31857010329",
+                },
+            ],
+        },
+        contact: {
+            title: "Neem Contact Op",
+            subtitle: "Klaar om uw volgende project te starten?",
+            form: {
+                firstName: "Voornaam",
+                lastName: "Achternaam",
+                email: "E-mail",
+                company: "Bedrijf",
+                role: "Functie",
+                message: "Bericht",
+                submit: "Verstuur Bericht",
+                sending: "Versturen...",
+            },
+            info: {
+                email: "E-mail",
+                phone: "Telefoon",
+                address: "Kantoor",
+                postalAddress: "Post Adres",
+                kvk: "KVK Nummer",
+            },
+        },
+    },
+} as const
+
+export type Language = keyof typeof siteContent
