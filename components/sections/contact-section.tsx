@@ -128,7 +128,7 @@ export function ContactSection({ language = "en" }: { language?: Language }) {
           </div>
 
           {/* Right side - Minimal form */}
-          <div className="flex flex-col pt-12 md:pt-28">
+          <div className="flex flex-col pt-12 md:pt-44">
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div
                 className={`transition-all duration-700 ${isVisible ? "translate-x-0 opacity-100" : "translate-x-16 opacity-0"

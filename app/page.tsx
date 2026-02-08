@@ -18,7 +18,7 @@ export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [language, setLanguage] = useState<"en" | "nl">("en")
   const buttonText = "Helpdesk"
-  const [currentThemeKey, setCurrentThemeKey] = useState<ThemeKey | "custom">("modern")
+  const [currentThemeKey, setCurrentThemeKey] = useState<ThemeKey | "custom">("default")
   const [customPrimary, setCustomPrimary] = useState("#3b82f6")
   const [customSecondary, setCustomSecondary] = useState("#10b981")
 
