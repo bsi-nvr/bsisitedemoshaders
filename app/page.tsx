@@ -108,6 +108,28 @@ export default function Home() {
 
   // Touch and Wheel event listeners removed in favor of CSS Scroll Snap
 
+  // Re-enable wheel support for vertical-to-horizontal scrolling
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      // If no horizontal scroll, map vertical to horizontal
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && scrollContainerRef.current) {
+        scrollContainerRef.current.scrollLeft += e.deltaY
+      }
+    }
+
+    const container = scrollContainerRef.current
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: true })
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel)
+      }
+    }
+  }, [])
+
+  // Update section monitoring
   useEffect(() => {
     const handleScroll = () => {
       if (scrollThrottleRef.current) return
