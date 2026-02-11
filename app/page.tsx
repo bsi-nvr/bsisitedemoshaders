@@ -1,7 +1,7 @@
 "use client"
 
 import { Shader, ChromaFlow, Swirl } from "shaders/react"
-import { CustomCursor } from "@/components/custom-cursor"
+
 import { GrainOverlay } from "@/components/grain-overlay"
 
 import { ServicesSection } from "@/components/sections/services-section"
@@ -43,8 +43,7 @@ export default function Home() {
       },
     }
   }, [currentThemeKey, customPrimary, customSecondary])
-  const touchStartY = useRef(0)
-  const touchStartX = useRef(0)
+  // Removed touch and wheel interaction refs as native scroll snap handles this better
   const shaderContainerRef = useRef<HTMLDivElement>(null)
   const scrollThrottleRef = useRef<number | null>(null)
 
@@ -107,91 +106,7 @@ export default function Home() {
     }
   }
 
-  useEffect(() => {
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY.current = e.touches[0].clientY
-      touchStartX.current = e.touches[0].clientX
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const diffY = Math.abs(e.touches[0].clientY - touchStartY.current)
-      const diffX = Math.abs(e.touches[0].clientX - touchStartX.current)
-      if (diffY > 10 || diffX > 10) {
-        e.preventDefault()
-      }
-    }
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      const touchEndY = e.changedTouches[0].clientY
-      const touchEndX = e.changedTouches[0].clientX
-      const deltaY = touchStartY.current - touchEndY
-      const deltaX = touchStartX.current - touchEndX
-
-      // Vertical Swipe
-      if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 50) {
-        if (deltaY > 0 && currentSection < 3) {
-          scrollToSection(currentSection + 1)
-        } else if (deltaY < 0 && currentSection > 0) {
-          scrollToSection(currentSection - 1)
-        }
-      }
-      // Horizontal Swipe
-      else if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-        if (deltaX > 0 && currentSection < 3) {
-          scrollToSection(currentSection + 1)
-        } else if (deltaX < 0 && currentSection > 0) {
-          scrollToSection(currentSection - 1)
-        }
-      }
-    }
-
-    const container = scrollContainerRef.current
-    if (container) {
-      container.addEventListener("touchstart", handleTouchStart, { passive: true })
-      container.addEventListener("touchmove", handleTouchMove, { passive: false })
-      container.addEventListener("touchend", handleTouchEnd, { passive: true })
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("touchstart", handleTouchStart)
-        container.removeEventListener("touchmove", handleTouchMove)
-        container.removeEventListener("touchend", handleTouchEnd)
-      }
-    }
-  }, [currentSection])
-
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault()
-
-        if (!scrollContainerRef.current) return
-
-        scrollContainerRef.current.scrollBy({
-          left: e.deltaY,
-          behavior: "instant",
-        })
-
-        const sectionWidth = scrollContainerRef.current.offsetWidth
-        const newSection = Math.round(scrollContainerRef.current.scrollLeft / sectionWidth)
-        if (newSection !== currentSection) {
-          setCurrentSection(newSection)
-        }
-      }
-    }
-
-    const container = scrollContainerRef.current
-    if (container) {
-      container.addEventListener("wheel", handleWheel, { passive: false })
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("wheel", handleWheel)
-      }
-    }
-  }, [currentSection])
+  // Touch and Wheel event listeners removed in favor of CSS Scroll Snap
 
   useEffect(() => {
     const handleScroll = () => {
@@ -232,7 +147,7 @@ export default function Home() {
 
   return (
     <main className="relative h-screen w-full overflow-hidden bg-background">
-      <CustomCursor />
+
       <GrainOverlay />
 
       <div
@@ -322,12 +237,12 @@ export default function Home() {
       <div
         ref={scrollContainerRef}
         data-scroll-container
-        className={`relative z-10 flex h-screen overflow-x-auto overflow-y-hidden transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"
+        className={`relative z-10 flex h-screen overflow-x-auto overflow-y-hidden snap-x snap-mandatory transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"
           }`}
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {/* Hero Section */}
-        <section className="flex min-h-screen w-screen shrink-0 flex-col justify-end px-6 pb-16 pt-24 md:px-12 md:pb-24">
+        <section className="flex min-h-screen w-screen shrink-0 snap-start flex-col justify-end px-6 pb-16 pt-24 md:px-12 md:pb-24">
           <div className="max-w-3xl">
 
             <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-sans text-6xl font-light leading-[1.1] tracking-tight text-white duration-1000 md:text-7xl lg:text-8xl">
