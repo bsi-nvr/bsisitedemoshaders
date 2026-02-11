@@ -20,7 +20,7 @@ export function AboutSection({ scrollToSection, language = "en" }: { scrollToSec
   return (
     <section
       ref={ref}
-      className="flex h-screen w-screen shrink-0 snap-start items-center px-6 pt-32 md:px-12 md:pt-40 lg:px-16"
+      className="flex h-screen w-screen shrink-0 snap-start items-center overflow-y-auto overflow-x-hidden px-6 pt-32 md:px-12 md:pt-40 lg:px-16"
     >
       <div className="mx-auto w-full max-w-7xl">
         {/* About Brainsoft Text */}

@@ -109,25 +109,62 @@ export default function Home() {
   // Touch and Wheel event listeners removed in favor of CSS Scroll Snap
 
   // Re-enable wheel support for vertical-to-horizontal scrolling
+  // Re-enable wheel support for vertical-to-horizontal scrolling
+  // Discrete scroll logic for desktop mouse wheel
   useEffect(() => {
+    let wheelTimeout: NodeJS.Timeout
+    let wheelDelta = 0
+    const WHEEL_THRESHOLD = 50
+    const COOLDOWN = 800 // ms
+
     const handleWheel = (e: WheelEvent) => {
-      // If no horizontal scroll, map vertical to horizontal
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && scrollContainerRef.current) {
-        scrollContainerRef.current.scrollLeft += e.deltaY
+      // Focus on vertical scrolling
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault() // Stop native scroll validation
+
+        // If we are currently scrolling (cooldown active), ignore input
+        if (wheelTimeout) return
+
+        wheelDelta += e.deltaY
+
+        if (wheelDelta > WHEEL_THRESHOLD) {
+          // Scroll Down / Next
+          if (currentSection < 3) {
+            scrollToSection(currentSection + 1)
+            // Set cooldown
+            wheelTimeout = setTimeout(() => {
+              wheelDelta = 0
+              // @ts-ignore
+              wheelTimeout = null
+            }, COOLDOWN)
+          } else {
+            wheelDelta = 0 // Reset if at end
+          }
+        } else if (wheelDelta < -WHEEL_THRESHOLD) {
+          // Scroll Up / Prev
+          if (currentSection > 0) {
+            scrollToSection(currentSection - 1)
+            // Set cooldown
+            wheelTimeout = setTimeout(() => {
+              wheelDelta = 0
+              // @ts-ignore
+              wheelTimeout = null
+            }, COOLDOWN)
+          } else {
+            wheelDelta = 0 // Reset if at start
+          }
+        }
       }
     }
 
-    const container = scrollContainerRef.current
-    if (container) {
-      container.addEventListener("wheel", handleWheel, { passive: true })
-    }
+    // Attach to window
+    window.addEventListener("wheel", handleWheel, { passive: false })
 
     return () => {
-      if (container) {
-        container.removeEventListener("wheel", handleWheel)
-      }
+      window.removeEventListener("wheel", handleWheel)
+      clearTimeout(wheelTimeout)
     }
-  }, [])
+  }, [currentSection])
 
   // Update section monitoring
   useEffect(() => {
