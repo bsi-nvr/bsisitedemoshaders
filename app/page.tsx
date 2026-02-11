@@ -114,7 +114,9 @@ export default function Home() {
     }
 
     const handleTouchMove = (e: TouchEvent) => {
-      if (Math.abs(e.touches[0].clientY - touchStartY.current) > 10) {
+      const diffY = Math.abs(e.touches[0].clientY - touchStartY.current)
+      const diffX = Math.abs(e.touches[0].clientX - touchStartX.current)
+      if (diffY > 10 || diffX > 10) {
         e.preventDefault()
       }
     }
@@ -125,10 +127,19 @@ export default function Home() {
       const deltaY = touchStartY.current - touchEndY
       const deltaX = touchStartX.current - touchEndX
 
+      // Vertical Swipe
       if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 50) {
         if (deltaY > 0 && currentSection < 3) {
           scrollToSection(currentSection + 1)
         } else if (deltaY < 0 && currentSection > 0) {
+          scrollToSection(currentSection - 1)
+        }
+      }
+      // Horizontal Swipe
+      else if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+        if (deltaX > 0 && currentSection < 3) {
+          scrollToSection(currentSection + 1)
+        } else if (deltaX < 0 && currentSection > 0) {
           scrollToSection(currentSection - 1)
         }
       }
